@@ -8,6 +8,7 @@ const db = mysql.createConnection({
   database: 'soundCloutPlayer',
 });
 
+// append all db functions w/ Async
 Promise.promisifyAll(db);
 
 module.exports = db;

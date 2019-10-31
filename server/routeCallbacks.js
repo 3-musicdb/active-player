@@ -1,5 +1,12 @@
 const schema = require('../database/data/schemaHelpers');
 
+// where are schema.Async functions?
+// from promisify
+// append all promisified funcs w/ Async
+
+// only used songs table for this module
+// upNext & previousPlays tables = unfinished stretch goals
+
 module.exports = {
   getSong: (req, res) => {
     schema.songGetterAsync(req.params.id)
@@ -22,3 +29,8 @@ module.exports = {
       .catch((err) => res.status(400).send(err));
   },
 };
+
+// NOTES:
+// add deleteLike callback
+// use express().Router somehow
+  // organize by http verb || noun
