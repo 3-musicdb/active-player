@@ -5,6 +5,7 @@ const db = require('../index');
 
 // what does .queryAsync mean
   // part of mysql syntax?
+  // promisify library appends Async to each function
 
 // where is playlist in schema?
 // refers to 1 of 3 tables in schema

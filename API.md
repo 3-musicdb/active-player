@@ -1,15 +1,17 @@
 # CRUD ROUTES
 
 ## Create:
-- post song: /playlist/:playlist
+  - POST /songs/
+  - POST /playlists/:playlistId
+    - post song to playlist || create new playlist?
 
 ## Read:
-- get song: /songs/:id
-- get playlist: /:playlist
+  - GET /songs/:id
+  - GET /playlists/:playlistName
 
 ## Update:
-- patch like: /like/:songId
-- patch timestamp: /song/:timeStamp
+  - PATCH /like/:songId
+  - PATCH /songs/:id/:timeStamp
 
 ## Delete
-- delete song: /songs/:id
+  - DELETE /songs/:id
