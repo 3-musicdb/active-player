@@ -1,0 +1,9 @@
+{
+  songId: NUMBER,
+  title: STRING,
+  album: STRING,
+  likes: NUMBER,
+  upNext: STRING,
+  prevPlayed: STRING,
+  time: NUMBER
+}

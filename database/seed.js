@@ -2,6 +2,10 @@ const faker = require('faker');
 const schema = require('./data/schemaHelpers');
 const exampleSongs = require('./data/exampleSongs');
 
+// USE FAKER TO MAKE FAKE SONG NAME & FAKE THUMBNAIL
+// OR DO NOT USE AUDIO DATA
+// OR REMOVE songFile
+
 const seedData = () => {
   for (let i = 0; i < 15; i += 1) {
     // If no song at that index, use the last song (uses faker data to fill in details)
