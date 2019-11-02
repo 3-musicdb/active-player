@@ -17,3 +17,5 @@ coverage/clover.xml
 coverage/lcov-report/index.html
 
 PROCESS.md
+
+*.csv

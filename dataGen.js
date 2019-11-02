@@ -5,7 +5,7 @@ const writeSongs = fs.createWriteStream('songs.csv');
 writeSongs.write('id,title,album,artist,likes,length\n', 'utf8');
 
 const writeData = (writer, encoding, callback) => {
-  let i = 100;
+  let i = 1000;
   let id = 0;
   const write = () => {
     let ok = true;
