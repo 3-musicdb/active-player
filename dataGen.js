@@ -2,10 +2,11 @@ const fs = require('fs');
 const zlib = require('zlib');
 const faker = require('faker');
 const gzip = zlib.createGzip();
-const out = fs.createWriteStream('songs.csv.gz');
+// const inp = fs.createReadStream('songs.csv');
+// const out = fs.createWriteStream('songs.csv.gz');
 
 const writeSongs = fs.createWriteStream('songs.csv');
-const inp = fs.createReadStream('songs.csv');
+// const compressSongs = gzip(data).pipe(writeSongs);
 writeSongs.write('id,title,album,artist,likes,length\n', 'utf8');
 
 const writeData = (writer, encoding, callback) => {
@@ -41,4 +42,4 @@ writeData(writeSongs, 'utf-8', () => {
 });
 
 // compress file after it has been created
-inp.pipe(gzip).pipe(out)
+// inp.pipe(gzip).pipe(out)

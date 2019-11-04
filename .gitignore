@@ -19,3 +19,5 @@ coverage/lcov-report/index.html
 PROCESS.md
 
 *.csv
+
+*.csv.gz
