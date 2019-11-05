@@ -13,10 +13,8 @@ Parameters
 | `title` | `text` | *Required.* Song title. |
 | `album` | `text` | *Required.* Album song comes from. |
 | `artist` | `text` | *Required.* Name of artist. |
-| `likes` | `integer` | *Required.* Number of likes song has recieved. |
-| `length` | `integer` | *Required.* Total length of song. |
-| `upNext` | `text` | *Required.* Song to be played next. |
-| `prevPlayed` | `text` | *Required.* Previously played song. |
+| `likes` | `integer` | Number of likes song has recieved. |
+| `length` | `integer` | *Required.* Total length of song in seconds. |
 
 
 ## Read (GET)
@@ -41,9 +39,9 @@ Response
 | `artist` | `text` | *Required.* Name of artist. |
 | `upNext` | `text` | Name of song to be played next. |
 | `prevPlayed` | `text` | Name of previously played song. |
-| `length` | `decimal` | *Required.* Length of song in minutes and seconds. |
+| `length` | `integer` | *Required.* Length of song in seconds. |
 | `likes` | `integer` | *Required.* Number of likes for this song. |
-| `timestamp` | `decimal` | Timestamp of last playing song. |
+| `timestamp` | `integer` | Timestamp of last playing song at seconds. |
 
 ## Update (PATCH)
 
@@ -67,7 +65,7 @@ Parameters
 | Name | Type | Description |
 |:----:|:----:|:----:|
 | `songId` | `integer` | *Required.* Id of current song. |
-| `timestamp` | `decimal` | *Required.* Timestamp of currently playing song in minutes and seconds. |
+| `timestamp` | `integer` | *Required.* Timestamp of currently playing song in seconds. |
 
 ## Delete (DELETE)
 
