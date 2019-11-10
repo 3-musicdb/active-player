@@ -1,37 +1,41 @@
-DROP DATABASE IF EXISTS soundCloutPlayer;
+DROP DATABASE IF EXISTS soundcloutplayer;
 
-CREATE DATABASE soundCloutPlayer;
+DROP TABLE IF EXISTS genre, albums, artists, songs;
 
-USE soundCloutPlayer;
+CREATE DATABASE soundcloutplayer;
+
+\c soundcloutplayer
+
+CREATE TABLE genre (
+  id SERIAL PRIMARY KEY,
+  genreId INT NOT NULL,
+  name TEXT NOT NULL
+);
+
+CREATE TABLE albums (
+  id SERIAL PRIMARY KEY,
+  albumId INT NOT NULL,
+  name TEXT NOT NULL
+);
+
+CREATE TABLE artists (
+  id SERIAL PRIMARY KEY,
+  artistId INT NOT NULL,
+  firstname TEXT NOT NULL,
+  lastname TEXT NOT NULL
+);
 
 CREATE TABLE songs (
-  id INT NOT NULL AUTO_INCREMENT,
+  id SERIAL PRIMARY KEY,
   songId INT NOT NULL,
-  length INT NOT NULL,
-  timestamp INT DEFAULT 0,
-  isliked TINYINT DEFAULT 0,
-  songFile VARCHAR(150),
-  title VARCHAR(150),
-  artist VARCHAR(60),
-  album VARCHAR(60),
-  thumbnail VARCHAR(150),
-  PRIMARY KEY (id)
+  title TEXT NOT NULL,
+  songlength INT NOT NULL,
+  likes INT NOT NULL,
+  id_genre INT NOT NULL,
+  id_album INT NOT NULL,
+  id_artist INT NOT NULL,
+  tstamp INT DEFAULT 0
 );
 
-CREATE TABLE upNext (
-  position INT AUTO_INCREMENT,
-  songId INT,
-  FOREIGN KEY (songId) 
-    REFERENCES songs(id)
-    ON UPDATE CASCADE,
-  UNIQUE KEY (position)
-);
 
-CREATE TABLE previousPlays (
-  position INT AUTO_INCREMENT,
-  songId INT,
-  FOREIGN KEY (songId) 
-    REFERENCES songs(id)
-    ON UPDATE CASCADE,
-  UNIQUE KEY (position)
-);
+
