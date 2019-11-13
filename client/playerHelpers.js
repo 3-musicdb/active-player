@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+// control actual functionality of playing song
+// next button
+// back button
+// play/pause
+// time stamp
+
 const playerHelpers = {
   // Current Player song will always be the first song in the next up playlist
   next() {
