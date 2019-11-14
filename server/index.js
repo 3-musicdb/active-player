@@ -1,15 +1,19 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-var cors = require('cors')
+var cors = require('cors');
 const cb = require('./routeCallbacks');
+const client = require('../database/index.js');
+
 
 const app = express();
 const port = 3020;
 
 // why not:
-// app.use(bodyParser.json());
-const jsonParser = bodyParser.json();
+app.use(bodyParser.json());
+// const jsonParser = bodyParser.json();
+app.use(bodyParser.json());
 
 // var corsOptions = {
 //     origin: true,
@@ -19,20 +23,100 @@ const jsonParser = bodyParser.json();
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use('/:id', express.static(path.join(__dirname, '../public')));
 
-// get song
-app.get('/songs/:id', cb.getSong);
+// CREATE
 
-// get playlist
-app.get('/:playlist', cb.getPlaylist);
+// post new song to db
+app.post('/songs/:id', (req, res) => {
+  const songid = req.params.id;
+  const stmt = `INSERT INTO songs VALUES (
+    ${songid}
+    ${title},
+    ${length},
+    ${likes},
+    ${id_genre},
+    ${id_album},
+    ${id_artist}
+    );`
 
-// post like to song
-app.post('/like/:songId', jsonParser, cb.likeEntry);
+  client.query(stmt, (err, data) => {
+    if (err) {
+      console.log(err.stack);
+    } else {
+      res.status(200).send(data);
+    }
+  })
+})
 
-// add song to playlist once liked
-app.post('/playlist/:playlist', jsonParser, cb.playlistEntry);
+// READ
 
-// add delete route to unlike a song
+// get specific song
+app.get('/songs/:id', (req, res) => {
+    // get song informaton and send back to client
+    const songVal = req.params.id;
+    
+    const stmt = `SELECT * FROM songs WHERE id = ${songVal};`
 
-app.listen(port);
+    client.query(stmt, (err, data) => {
+      if (err) {
+        console.log(err.stack);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+});
+
+// get entire album in place of playlist
+app.get('/albums/:id', (req, res) => {
+  // get album and send back to client as playlist
+  const albumId = req.params.id;
+  const stmt = `SELECT * FROM songs WHERE id_album = ${albumId};`
+
+  client.query(stmt, (err, data) => {
+    if (err) {
+      console.log(err.stack);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+// UPDATE
+
+// BUILD OUT UPDATE FUNCTIONALITY FOR LATER
+
+// update likes of song
+// app.update('/update/songs/:id', (req, res) => {
+//   const id = req.params.id;
+// })
+
+// DELETE
+
+// delete selected song from db
+app.delete('/songs/:id', (req, res) => {
+  const id = req.params.id;
+  const stmt = `DELETE FROM songs WHERE id = ${id};`
+
+  client.query(stmt, (err, data) => {
+    if (err) {
+      console.log(err.stack);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Express server listening on port ${port}!`);
+});
+
+/*
+
+QUESTIONS
+
+how are routes supposed to be REST compliant if they are the same?
+
+do I need a audio file to go along w/ the data?
+
+*/

@@ -1,5 +1,12 @@
 import axios from 'axios';
 
+// control meta functions
+// mount songs
+// tick = slider showing progress of song playing
+// shuffle playlist
+// repeat song
+// post likes
+
 const metaHelpers = {
   // Current Player song will always be the first song in the next up playlist
   mount() {
@@ -7,6 +14,7 @@ const metaHelpers = {
       .then((results) => {
         // 1) Get all the songs as the default playlist
         const songs = results.data;
+        console.log('mount songs: ', results.data);
         // 2) Splice out first song and push to upNext playlist
         const upNext = [];
         upNext.push(songs.shift());
