@@ -1,11 +1,10 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 var cors = require('cors');
 const cb = require('./routeCallbacks');
-const db = require('../database/index.js');
 const client = require('../database/index.js');
-// require('newrelic');
 
 
 const app = express();
@@ -29,7 +28,7 @@ app.use('/:id', express.static(path.join(__dirname, '../public')));
 // CREATE
 
 // post new song to db
-app.post('/create/songs/:id', (req, res) => {
+app.post('/songs/:id', (req, res) => {
   const songid = req.params.id;
   const stmt = `INSERT INTO songs VALUES (
     ${songid}
@@ -53,7 +52,7 @@ app.post('/create/songs/:id', (req, res) => {
 // READ
 
 // get specific song
-app.get('/read/songs/:id', (req, res) => {
+app.get('/songs/:id', (req, res) => {
     // get song informaton and send back to client
     const songVal = req.params.id;
     
@@ -69,7 +68,7 @@ app.get('/read/songs/:id', (req, res) => {
 });
 
 // get entire album in place of playlist
-app.get('/read/albums/:id', (req, res) => {
+app.get('/albums/:id', (req, res) => {
   // get album and send back to client as playlist
   const albumId = req.params.id;
   const stmt = `SELECT * FROM songs WHERE id_album = ${albumId};`
@@ -85,6 +84,8 @@ app.get('/read/albums/:id', (req, res) => {
 
 // UPDATE
 
+// BUILD OUT UPDATE FUNCTIONALITY FOR LATER
+
 // update likes of song
 // app.update('/update/songs/:id', (req, res) => {
 //   const id = req.params.id;
@@ -93,7 +94,7 @@ app.get('/read/albums/:id', (req, res) => {
 // DELETE
 
 // delete selected song from db
-app.delete('/delete/songs/:id', (req, res) => {
+app.delete('/songs/:id', (req, res) => {
   const id = req.params.id;
   const stmt = `DELETE FROM songs WHERE id = ${id};`
 

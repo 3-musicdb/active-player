@@ -1,8 +1,7 @@
 // const mysql = require('mysql');
 // const password = require('../config.js')
 const { Client } = require('pg');
-const connectionString = 'postgresql://localhost:5432/soundcloutplayer';
-const Promise = require('bluebird');
+// const connectionString = 'postgresql://localhost:5432/soundcloutplayer';
 
 const client = new Client({
   user: 'ParteekSSandhu',
